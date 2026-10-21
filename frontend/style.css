@@ -1,0 +1,367 @@
+/* 1990'lar web sitesi stili: karo arkaplan, Times/Comic Sans, mavi linkler,
+   Windows 95 pencere ve dugmeleri, yanip sonen yazilar. */
+
+body {
+  margin: 0;
+  padding: 8px;
+  color: #000;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  /* "Yildizli gece" desenli tekrar eden arkaplan */
+  background-color: #000080;
+  background-image:
+    radial-gradient(circle, #ffffff 1px, transparent 1.5px),
+    radial-gradient(circle, #ffff00 1px, transparent 1.5px);
+  background-size: 40px 40px, 70px 70px;
+  background-position: 0 0, 20px 25px;
+}
+
+a:link { color: #0000ee; }
+a:visited { color: #551a8b; }
+a:active { color: #ff0000; }
+
+.top-marquee {
+  width: 760px;
+  max-width: 100%;
+  background: #000;
+  color: #00ff00;
+  font-family: "Courier New", monospace;
+  border: 2px solid #c0c0c0;
+  padding: 2px 0;
+}
+
+h1.rainbow {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 48px;
+  margin: 12px 0 4px;
+  background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, magenta);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(2px 2px 0 #000);
+}
+
+.subtitle {
+  color: #ffff00;
+  font-family: "Comic Sans MS", cursive;
+  margin: 0 0 8px;
+}
+
+.gif-fake { display: none; }
+
+.blink {
+  animation: blink 1s steps(1, end) infinite;
+  color: #ff0000;
+  font-weight: bold;
+}
+@keyframes blink {
+  50% { visibility: hidden; }
+}
+
+hr.rule {
+  width: 760px;
+  max-width: 100%;
+  height: 6px;
+  border: 0;
+  background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, magenta);
+}
+
+/* Tablo duzeni (90'larda her sey tabloydu) */
+table.layout {
+  width: 760px;
+  max-width: 100%;
+  background: #c0c0c0;
+  border: 3px outset #fff;
+  margin: 8px 0;
+  text-align: left;
+}
+
+td.sidebar {
+  background: #008080;
+  border-right: 2px groove #fff;
+  color: #fff;
+}
+
+.menu-title {
+  background: #000080;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 2px;
+  margin: 6px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+ul.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+ul.menu li { margin: 5px 0; }
+ul.menu a:link, ul.menu a:visited { color: #ffff00; }
+ul.menu a:hover { color: #fff; background: #000080; }
+
+.counter {
+  background: #000;
+  color: #ff0000;
+  font-family: "Courier New", monospace;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-align: center;
+  border: 3px inset #fff;
+  padding: 2px;
+}
+
+.small { font-size: 12px; }
+td.sidebar .small { color: #fff; text-align: center; }
+
+.construction {
+  margin-top: 16px;
+  padding: 6px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  color: #000;
+  background: repeating-linear-gradient(45deg, #ffff00, #ffff00 10px, #000 10px, #000 20px);
+}
+.construction { text-shadow: 1px 1px 0 #ffff00, -1px -1px 0 #ffff00, 1px -1px 0 #ffff00, -1px 1px 0 #ffff00; }
+
+td.main { background: #c0c0c0; }
+
+/* Windows 95 penceresi */
+.window {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 3px 4px;
+}
+.winbtns b {
+  display: inline-block;
+  width: 16px;
+  height: 14px;
+  line-height: 12px;
+  margin-left: 2px;
+  text-align: center;
+  background: #c0c0c0;
+  color: #000;
+  border: 2px outset #fff;
+  font-size: 10px;
+}
+
+.menubar {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  padding: 2px 6px;
+  border-bottom: 1px solid #808080;
+}
+
+.chat-log {
+  height: 340px;
+  overflow-y: auto;
+  background: #fff;
+  border: 2px inset #fff;
+  margin: 6px;
+  padding: 6px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+}
+
+.msg { margin-bottom: 10px; line-height: 1.35; white-space: pre-wrap; }
+.msg .who { font-weight: bold; }
+.msg.bot .who { color: #ff0000; }
+.msg.user .who { color: #0000ff; }
+.msg.system { color: #808080; font-style: italic; }
+
+.chat-form {
+  display: flex;
+  gap: 6px;
+  padding: 0 6px 6px;
+}
+
+#chat-input {
+  flex: 1;
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+  background: #fff;
+  border: 2px inset #fff;
+  padding: 3px 4px;
+}
+
+.btn95 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  padding: 3px 14px;
+  cursor: pointer;
+}
+.btn95:active:not(:disabled) { border-style: inset; }
+.btn95:disabled { color: #808080; cursor: wait; }
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  margin: 0 6px 6px;
+}
+.statusbar span {
+  border: 1px inset #fff;
+  padding: 1px 6px;
+}
+.statusbar #status { flex: 1; margin-right: 4px; }
+
+.box {
+  background: #ffffe0;
+  border: 2px ridge #fff;
+  padding: 4px 12px;
+  margin-bottom: 10px;
+}
+.box h2 {
+  font-family: "Comic Sans MS", cursive;
+  font-size: 20px;
+  color: #800000;
+  margin: 8px 0;
+}
+
+.badges { margin: 12px 0 6px; }
+.badge {
+  display: inline-block;
+  width: 108px;
+  margin: 0 4px;
+  padding: 4px;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-align: center;
+}
+
+p.small { color: #fff; }
+.box p.small { color: #000; }
+
+@media (max-width: 640px) {
+  h1.rainbow { font-size: 32px; }
+  td.sidebar { display: none; }
+}
+
+/* ---------- Ust buton sirasi ---------- */
+.era-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 0 10px;
+}
+
+/* ---------- Ziyaretci defteri notlari ---------- */
+.notes {
+  list-style: none;
+  margin: 10px 0 6px;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #fff;
+  border: 2px inset #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  text-align: left;
+}
+.notes:empty { display: none; }
+.note { padding: 6px 8px; border-bottom: 1px dashed #808080; }
+.note:last-child { border-bottom: 0; }
+.note .n-name { font-weight: bold; color: #0000ee; }
+.note .n-date { color: #808080; font-size: 12px; margin-left: 6px; }
+.note .n-text { margin-top: 2px; white-space: pre-wrap; word-break: break-word; }
+.note.fresh { animation: noteFlash 1.8s ease-out; }
+@keyframes noteFlash { 0%, 55% { background: #ffff66; } 100% { background: transparent; } }
+.note-empty { padding: 8px; color: #808080; font-style: italic; }
+
+/* ---------- "Katil" yan paneli ---------- */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  max-width: 92vw;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: #c0c0c0;
+  border-left: 3px outset #fff;
+  box-shadow: -4px 0 0 #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #000;
+  text-align: left;
+  transform: translateX(105%);
+  visibility: hidden;
+  transition: transform 0.3s ease, visibility 0s linear 0.3s;
+}
+.drawer.open {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.3s ease, visibility 0s;
+}
+.drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 6px;
+}
+.drawer-close {
+  width: 22px;
+  height: 20px;
+  padding: 0;
+  font-weight: bold;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  cursor: pointer;
+}
+.drawer-body { display: flex; flex-direction: column; gap: 6px; padding: 14px; }
+.drawer-body input,
+.drawer-body textarea {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  background: #fff;
+  border: 2px inset #fff;
+  padding: 4px;
+  resize: vertical;
+}
+.char-count { text-align: right; font-size: 12px; }
+.note-status { min-height: 1.3em; margin: 0; font-size: 13px; }
+.note-status.error { color: #c00000; }
+
+.join-btn { display: none; }
+
+/* ---------- Rozetler ve alt yazi: sohbet sutununun ortasina hizali ---------- */
+.below {
+  --side: 187px;              /* sol menu sutununun genisligi (tablo ile ayni) */
+  display: flex;
+  width: 760px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.below::before { content: ""; flex: 0 0 var(--side); }
+.below-main { flex: 1; min-width: 0; text-align: center; }
+@media (max-width: 640px) { .below { --side: 0px; } }

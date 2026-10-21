@@ -1,0 +1,195 @@
+/* Anime evreni: body.anime[data-theme="sakura|neon|shonen"].
+   İskelet modern.css'te; burada manga paneli görünümü ve her temanın renkleri var. */
+
+/* ---------- Ortak anime görünümü (manga paneli: kalın kontur + sert gölge) ---------- */
+body.anime {
+  --ink: #2b2140;      /* kontur rengi */
+  --offset: #2b2140;   /* sert gölge rengi */
+  --radius: 18px;
+  --panel-border: 3px solid var(--ink);
+  --panel-shadow: 6px 6px 0 var(--offset);
+  --bubble-border: 2px solid var(--ink);
+  --bubble-shadow: 3px 3px 0 var(--offset);
+  --input-border: 2px solid var(--ink);
+  --btn-border: 2px solid var(--ink);
+  --btn-shadow: 3px 3px 0 var(--offset);
+  --title-filter: drop-shadow(3px 3px 0 var(--ink));
+
+  font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Yu Gothic UI", "Meiryo",
+    "Segoe UI", system-ui, sans-serif;
+}
+
+body.anime td.sidebar,
+body.anime .box,
+body.anime .window,
+body.anime .drawer {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+body.anime h1.rainbow {
+  font-weight: 900;
+  font-size: 54px;
+  letter-spacing: 0.05em;
+}
+body.anime .titlebar,
+body.anime .drawer-head { border-bottom: 3px solid var(--ink); }
+body.anime .msg { border-radius: 16px; }
+body.anime .msg.bot { border-bottom-left-radius: 4px; }
+body.anime .msg.user { border-bottom-right-radius: 4px; }
+body.anime .drawer {
+  background: var(--panel-solid);
+  border-left: 3px solid var(--ink);
+  box-shadow: -6px 0 0 var(--offset);
+}
+body.anime .era-btn:hover,
+body.anime #send-btn:hover:not(:disabled),
+body.anime #note-submit:hover:not(:disabled),
+body.anime .join-btn:hover { transform: translate(-1px, -2px); }
+body.anime .era-btn:active,
+body.anime #send-btn:active:not(:disabled),
+body.anime #note-submit:active:not(:disabled),
+body.anime .join-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--offset); }
+
+/* ---------- Tema 1: Sakura Bahçesi (pastel, okul/günlük hayat) ---------- */
+body.anime[data-theme="sakura"] {
+  --bg: #ffeef5;
+  --text: #3b2a4a;
+  --soft: #55406a;
+  --muted: #7d5f87;
+  --glass: rgba(255, 255, 255, 0.9);
+  --panel-solid: #fffafd;
+  --line: rgba(74, 44, 94, 0.2);
+  --a1: #d6336c;
+  --a2: #b57edc;
+  --a3: #ff8fb8;
+  --input-bg: #ffffff;
+  --bubble-bot: #fff7fb;
+  --bubble-user: linear-gradient(135deg, #ffb3d1, #d9b8ff);
+  --hover: rgba(255, 143, 184, 0.28);
+  --shadow: rgba(74, 44, 94, 0.2);
+  --title-grad: linear-gradient(90deg, #ff4f9a, #c77dff, #4fb3ff);
+  --btn-grad: linear-gradient(135deg, #ffc2dc, #ffe0ee);
+  --send-grad: linear-gradient(135deg, #ffa8cc, #d9b8ff);
+  --btn-text: #3b1f4a;
+  --glow: rgba(214, 51, 108, 0.35);
+  --ink: #4a2c5e;
+  --offset: #ffa6cb;
+  --bg-image:
+    radial-gradient(rgba(255, 143, 184, 0.35) 2px, transparent 2.6px),
+    radial-gradient(70vw 50vh at 15% 5%, rgba(255, 255, 255, 0.9), transparent 60%),
+    linear-gradient(160deg, #ffe3ef, #f0e1ff 55%, #dff0ff);
+}
+body.anime[data-theme="sakura"] { background-size: 30px 30px, auto, auto; }
+
+/* ---------- Tema 2: Neon Tokyo (siberpunk, gece) ---------- */
+body.anime[data-theme="neon"] {
+  --bg: #07000f;
+  --text: #f3e9ff;
+  --soft: #d9c8f5;
+  --muted: #a590c9;
+  --glass: rgba(22, 6, 44, 0.82);
+  --panel-solid: #14052a;
+  --line: rgba(0, 240, 255, 0.28);
+  --a1: #00f0ff;
+  --a2: #ff2e97;
+  --a3: #ffe600;
+  --input-bg: rgba(0, 0, 0, 0.5);
+  --bubble-bot: rgba(0, 240, 255, 0.08);
+  --bubble-user: linear-gradient(135deg, #ff2e97, #7a2cff);
+  --hover: rgba(255, 46, 151, 0.28);
+  --shadow: rgba(0, 0, 0, 0.6);
+  --title-grad: linear-gradient(90deg, #00f0ff, #ff2e97, #ffe600);
+  --btn-grad: linear-gradient(135deg, #ff2e97, #7a2cff);
+  --send-grad: linear-gradient(135deg, #00c8ff, #7a2cff);
+  --btn-text: #ffffff;
+  --glow: rgba(0, 240, 255, 0.9);
+  --ink: #00f0ff;
+  --offset: #ff2e97;
+  --panel-shadow: 6px 6px 0 var(--offset), 0 0 30px rgba(0, 240, 255, 0.25);
+  --title-filter: drop-shadow(3px 3px 0 #7a2cff) drop-shadow(0 0 16px rgba(255, 46, 151, 0.7));
+  --bg-image:
+    linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 46, 151, 0.1) 1px, transparent 1px),
+    radial-gradient(60vw 50vh at 85% 0%, rgba(122, 44, 255, 0.4), transparent 60%),
+    radial-gradient(60vw 50vh at 5% 100%, rgba(255, 46, 151, 0.3), transparent 60%);
+}
+body.anime[data-theme="neon"] { background-size: 44px 44px, 44px 44px, auto, auto; }
+body.anime[data-theme="neon"] .msg.user { text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35); }
+
+/* ---------- Tema 3: Şonen Arena (hız çizgileri, macera/dövüş) ---------- */
+body.anime[data-theme="shonen"] {
+  --bg: #ffcf33;
+  --text: #17120a;
+  --soft: #33270f;
+  --muted: #5d4a1c;
+  --glass: rgba(255, 251, 235, 0.95);
+  --panel-solid: #fffbeb;
+  --line: rgba(23, 18, 10, 0.25);
+  --a1: #cf2a00;
+  --a2: #1e6bff;
+  --a3: #ff9f1c;
+  --input-bg: #ffffff;
+  --bubble-bot: #ffffff;
+  --bubble-user: linear-gradient(135deg, #ff7a45, #ffb400);
+  --hover: rgba(255, 75, 43, 0.2);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --title-grad: linear-gradient(90deg, #ff2d1a, #ff7a00, #ffc400);
+  --title-filter: drop-shadow(4px 4px 0 #17120a);
+  --btn-grad: linear-gradient(135deg, #fff06a, #ffc21a);
+  --send-grad: linear-gradient(135deg, #ff7a45, #ffb400);
+  --btn-text: #17120a;
+  --glow: rgba(207, 42, 0, 0.35);
+  --ink: #17120a;
+  --offset: #17120a;
+  --bg-image:
+    radial-gradient(circle at 50% 35%, transparent 22%, rgba(255, 110, 0, 0.5) 100%),
+    repeating-conic-gradient(from 0deg at 50% 35%, #ffdf55 0deg 4deg, #ffc21f 4deg 8deg);
+}
+
+/* ---------- Arka plan efektleri (#fx): JS tema'ya göre parçacık üretir ---------- */
+.fx {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.fx span {
+  position: absolute;
+  line-height: 1;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: fxFall linear infinite;
+}
+.fx[data-kind="sakura"] span { color: #ff8fb8; }
+.fx[data-kind="neon"] span {
+  color: #00f0ff;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  text-shadow: 0 0 8px currentColor;
+}
+.fx[data-kind="neon"] span:nth-child(3n) { color: #ff2e97; }
+.fx[data-kind="shonen"] span {
+  color: #ff4b2b;
+  top: auto;
+  bottom: -8vh;
+  animation-name: fxRise;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+.fx[data-kind="shonen"] span:nth-child(2n) { color: #ffffff; }
+
+@keyframes fxFall {
+  0%   { transform: translate3d(0, -8vh, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.85; }
+  90%  { opacity: 0.85; }
+  100% { transform: translate3d(var(--drift, 40px), 108vh, 0) rotate(var(--spin, 360deg)); opacity: 0; }
+}
+@keyframes fxRise {
+  0%   { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0; }
+  15%  { opacity: 0.95; }
+  100% { transform: translate3d(var(--drift, 30px), -115vh, 0) scale(1.2) rotate(var(--spin, 180deg)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx { display: none; }
+}

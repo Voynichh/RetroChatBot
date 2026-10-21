@@ -1,0 +1,395 @@
+/* Gotik evren: body.gothic[data-theme="classic|metal|fantasy"].
+   İskelet modern.css'te (değişkenlerle); burada her temanın renkleri, fontları, dekorları
+   ve arka plan efektleri var. */
+
+/* ---------- Ortak gotik ayarlar ---------- */
+body.gothic {
+  --ctl-radius: 8px;   /* butonlar ve inputlar */
+  --msg-radius: 10px;  /* sohbet balonları */
+}
+body.gothic :is(.era-btn, #send-btn, #note-submit, .join-btn) { border-radius: var(--ctl-radius); }
+body.gothic :is(#chat-input, .drawer-body input, .drawer-body textarea) { border-radius: var(--ctl-radius); }
+body.gothic :is(.note, .badge, .counter) { border-radius: var(--msg-radius); }
+body.gothic ul.menu a:link,
+body.gothic ul.menu a:visited { border-radius: var(--ctl-radius); }
+body.gothic .drawer-close { border-radius: var(--ctl-radius); }
+body.gothic .blink { border-radius: var(--ctl-radius); letter-spacing: 0.18em; }
+body.gothic .msg { border-radius: var(--msg-radius); }
+body.gothic .msg.bot { border-bottom-left-radius: 3px; }
+body.gothic .msg.user { border-bottom-right-radius: 3px; }
+body.gothic .drawer { background: var(--panel-solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
+body.gothic .titlebar,
+body.gothic .drawer-head { border-bottom-color: var(--line); }
+
+/* Panellerin üstünde süs şeridi (temaya göre) */
+body.gothic :is(td.sidebar, .box, .window)::before {
+  content: var(--orn);
+  display: block;
+  padding: 8px 0 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols", serif;
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  color: var(--a1);
+  opacity: 0.6;
+}
+body.gothic td.sidebar::before { margin-bottom: 12px; }
+
+/* ---------- "Fısıltı" kutusu: her birkaç saniyede değişen söz / şaka / bilgi ---------- */
+.flavor {
+  display: block;
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto 18px;
+  padding: 11px 18px;
+  text-align: left;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--soft);
+  background: var(--glass);
+  border: var(--bubble-border);
+  border-radius: var(--msg-radius, 10px);
+  box-shadow: var(--bubble-shadow);
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+.flavor:hover { filter: brightness(1.15); }
+.flavor:focus-visible { outline: 2px solid var(--a1); outline-offset: 2px; }
+.flavor-tag {
+  display: inline-block;
+  margin-right: 12px;
+  padding: 1px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--a1);
+  border: 1px solid currentColor;
+  border-radius: var(--ctl-radius, 6px);
+  vertical-align: 1px;
+}
+.flavor-text { font-style: italic; }
+.flavor.swap .flavor-tag,
+.flavor.swap .flavor-text { animation: flavorIn 0.6s ease; }
+@keyframes flavorIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Sabit dekor katmanı (sadece klasik temada görünür) */
+.deco { position: fixed; inset: 0; z-index: 0; pointer-events: none; display: none; overflow: hidden; }
+body.gothic[data-theme="classic"] .deco { display: block; }
+
+/* ======================================================================
+   1) KLASİK GOTİK: is kokulu katedral, sönmeye yüz tutmuş ateş
+      (Köln Katedrali havası; kasvetli, isli taş, haçlar ve ember turuncusu)
+   ====================================================================== */
+body.gothic[data-theme="classic"] {
+  --bg: #07080a;
+  --text: #ddd6c6;
+  --soft: #bdb6a6;
+  --muted: #8b8678;
+  --glass: rgba(17, 18, 21, 0.9);
+  --panel-solid: #131417;
+  --line: rgba(170, 158, 130, 0.22);
+  --a1: #cf9a52;              /* ember: linkler, etiketler */
+  --a2: #5c2420;
+  --a3: #394150;
+  --input-bg: rgba(0, 0, 0, 0.4);
+  --bubble-bot: rgba(255, 255, 255, 0.04);
+  --bubble-user: linear-gradient(135deg, #4b3022, #2c1c15);
+  --hover: rgba(207, 154, 82, 0.14);
+  --shadow: rgba(0, 0, 0, 0.75);
+  --title-grad: linear-gradient(180deg, #ece3cd, #8e866f);
+  --title-filter: drop-shadow(0 0 20px rgba(207, 154, 82, 0.3)) drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.8));
+  --btn-grad: linear-gradient(180deg, #34353a, #1d1e22);
+  --send-grad: linear-gradient(180deg, #34353a, #1d1e22);
+  --btn-text: #e6dfce;
+  --btn-border: 1px solid rgba(170, 158, 130, 0.45);
+  --btn-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --glow: rgba(207, 154, 82, 0.6);
+  --radius: 14px;
+  --ctl-radius: 8px;
+  --msg-radius: 12px;
+  --panel-border: 1px solid rgba(170, 158, 130, 0.26);
+  --panel-shadow: 0 14px 44px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 0 70px rgba(0, 0, 0, 0.45);
+  --bubble-border: 1px solid rgba(170, 158, 130, 0.2);
+  --bubble-shadow: none;
+  --input-border: 1px solid rgba(170, 158, 130, 0.3);
+  --orn: "\271D   \2720   \271D   \2720   \271D   \2720   \271D   \2720   \271D   \2720   \271D   \2720   \271D   \2720   \271D";
+  --bg-image:
+    radial-gradient(ellipse 70% 40% at 50% -5%, rgba(90, 85, 100, 0.28), transparent 70%),
+    radial-gradient(ellipse 55% 22% at 50% 110%, rgba(214, 120, 40, 0.26), transparent 70%),
+    linear-gradient(180deg, #0a0b0d, #06070a);
+
+  font-family: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+}
+/* Yazı stili korunur: kırık harfli (blackletter) başlık + Cinzel başlıklar */
+body.gothic[data-theme="classic"] h1.rainbow {
+  font-family: "UnifrakturCook", "Old English Text MT", "Palatino Linotype", serif;
+  font-weight: 700;
+  font-size: 62px;
+  letter-spacing: 0.02em;
+}
+body.gothic[data-theme="classic"] :is(.box h2, .menu-title, .titlebar, .drawer-head > span) {
+  font-family: "Cinzel", Georgia, serif;
+  letter-spacing: 0.06em;
+}
+body.gothic[data-theme="classic"] .titlebar::after { content: "\25CF  ateş sönmedi"; color: #d98a3a; }
+
+/* Gül pencere: başlığın arkasında, çok soluk ve yavaşça dönen halka */
+body.gothic[data-theme="classic"] .deco .rose {
+  position: absolute;
+  top: -42vh;
+  left: 50%;
+  width: 108vh;
+  height: 108vh;
+  margin-left: -54vh;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(207, 154, 82, 0.13) 0 1.2deg, transparent 1.2deg 15deg),
+    radial-gradient(circle, transparent 0 17%, rgba(207, 154, 82, 0.1) 17.4% 18.2%, transparent 18.6% 34%, rgba(207, 154, 82, 0.1) 34.4% 35.2%, transparent 35.6% 52%, rgba(207, 154, 82, 0.1) 52.4% 53.2%, transparent 53.6%);
+  -webkit-mask-image: radial-gradient(circle, #000 20%, transparent 66%);
+  mask-image: radial-gradient(circle, #000 20%, transparent 66%);
+  animation: roseTurn 300s linear infinite;
+}
+@keyframes roseTurn { to { transform: rotate(360deg); } }
+
+/* Kenarlarda sivri kemerli pencere dizileri */
+body.gothic[data-theme="classic"] .deco .arch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='120' viewBox='0 0 60 120'%3E%3Cpath d='M10 120V52Q10 22 30 4Q50 22 50 52V120M30 24V120M10 74H50' fill='none' stroke='%23a89d84' stroke-width='1.4'/%3E%3C/svg%3E") repeat-y center top / 60px 120px;
+  opacity: 0.16;
+}
+body.gothic[data-theme="classic"] .deco .arch.left {
+  left: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent);
+  mask-image: linear-gradient(90deg, #000 30%, transparent);
+}
+body.gothic[data-theme="classic"] .deco .arch.right {
+  right: 0;
+  -webkit-mask-image: linear-gradient(270deg, #000 30%, transparent);
+  mask-image: linear-gradient(270deg, #000 30%, transparent);
+}
+@media (max-width: 1180px) {
+  body.gothic[data-theme="classic"] .deco .arch { display: none; }
+}
+
+/* Kenarlarda kararan vinyet; ateş ışığı gibi hafifçe titrer */
+body.gothic[data-theme="classic"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  animation: candle 6s ease-in-out infinite;
+}
+@keyframes candle {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.82; }
+  60% { opacity: 0.95; }
+}
+
+/* Efektler: yükselen kızıl kıvılcımlar + yavaşça süzülen haçlar */
+.fx[data-kind="classic"] span.ember {
+  color: #d98a3a;
+  top: auto;
+  bottom: -8vh;
+  animation-name: fxRise;
+  text-shadow: 0 0 8px rgba(217, 138, 58, 0.8);
+}
+.fx[data-kind="classic"] span.cross {
+  color: #a39b88;
+  animation-name: fxFallDim;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+}
+@keyframes fxFallDim {
+  0%   { transform: translate3d(0, -8vh, 0) rotate(0deg); opacity: 0; }
+  12%  { opacity: 0.3; }
+  88%  { opacity: 0.3; }
+  100% { transform: translate3d(var(--drift, 30px), 108vh, 0) rotate(var(--spin, 40deg)); opacity: 0; }
+}
+
+/* ======================================================================
+   2) METAL GOTİK: neredeyse simsiyah, soğuk gümüş, çok donuk kızıl vurgu
+   ====================================================================== */
+body.gothic[data-theme="metal"] {
+  --bg: #050506;
+  --text: #e9e9ec;
+  --soft: #c5c5cb;
+  --muted: #8b8b93;
+  --glass: rgba(13, 13, 15, 0.93);
+  --panel-solid: #0e0e10;
+  --line: rgba(255, 255, 255, 0.12);
+  --a1: #cfcfd8;              /* gümüş: linkler, etiketler */
+  --a2: #7a2222;
+  --a3: #6b6b74;
+  --input-bg: rgba(0, 0, 0, 0.55);
+  --bubble-bot: rgba(255, 255, 255, 0.05);
+  --bubble-user: linear-gradient(135deg, #5a2323, #301313);
+  --hover: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.85);
+  --title-grad: linear-gradient(180deg, #f4f4f6 0%, #b9b9c0 48%, #5d5d64 52%, #d8d8de 100%);
+  --title-filter: drop-shadow(0 0 10px rgba(140, 30, 30, 0.45)) drop-shadow(2px 2px 0 #000);
+  --btn-grad: linear-gradient(180deg, #4a1c1c, #261010);
+  --send-grad: linear-gradient(180deg, #4a1c1c, #261010);
+  --btn-text: #f0e7e7;
+  --btn-border: 1px solid rgba(255, 255, 255, 0.22);
+  --btn-shadow: 0 2px 10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glow: rgba(207, 207, 216, 0.6);
+  --radius: 12px;
+  --ctl-radius: 8px;
+  --msg-radius: 10px;
+  --panel-border: 1px solid rgba(255, 255, 255, 0.14);
+  --panel-shadow: 0 14px 40px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --bubble-border: 1px solid rgba(255, 255, 255, 0.12);
+  --bubble-shadow: none;
+  --input-border: 1px solid rgba(255, 255, 255, 0.2);
+  --orn: "\25AC\25AC   \2620   \25AC\25AC   \2620   \25AC\25AC   \2620   \25AC\25AC   \2620   \25AC\25AC   \2620   \25AC\25AC";
+  --bg-image:
+    radial-gradient(ellipse 80% 30% at 50% 118%, rgba(120, 24, 18, 0.34), transparent 70%),
+    radial-gradient(ellipse 60% 25% at 15% -5%, rgba(255, 255, 255, 0.04), transparent 70%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0 2px, transparent 2px 6px);
+}
+body.gothic[data-theme="metal"] h1.rainbow {
+  font-family: "Metal Mania", Impact, "Arial Black", sans-serif;
+  font-weight: 400;
+  font-size: 66px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+body.gothic[data-theme="metal"] :is(.box h2, .menu-title, .titlebar, .drawer-head > span, .era-btn, #send-btn, #note-submit, .join-btn, .flavor-tag) {
+  font-family: "Oswald", "Arial Narrow", "Segoe UI", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+body.gothic[data-theme="metal"] .box h2 { letter-spacing: 0.08em; font-weight: 600; }
+body.gothic[data-theme="metal"] .titlebar::after { content: "\25CF  canlı"; color: #b24a4a; }
+body.gothic[data-theme="metal"] .msg.bot { border-left: 3px solid #6b2a2a; }
+/* Çok nadir ve hafif şimşek (göz yormasın diye çok soluk) */
+body.gothic[data-theme="metal"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: #ffffff;
+  opacity: 0;
+  animation: lightning 14s linear infinite;
+}
+@keyframes lightning {
+  0%, 89%, 100% { opacity: 0; }
+  89.5% { opacity: 0.09; }
+  90.2% { opacity: 0; }
+  91% { opacity: 0.05; }
+  92% { opacity: 0; }
+}
+.fx[data-kind="metal"] span {
+  color: #9a3b1d;
+  top: auto;
+  bottom: -8vh;
+  animation-name: fxRise;
+  text-shadow: 0 0 6px rgba(154, 59, 29, 0.7);
+}
+.fx[data-kind="metal"] span:nth-child(3n) { color: #8d8d95; text-shadow: none; }
+
+/* ======================================================================
+   3) DARK FANTASY: sisli diyar, parşömen, rünler, han ateşi
+   ====================================================================== */
+body.gothic[data-theme="fantasy"] {
+  --bg: #070d0e;
+  --text: #eadfc4;
+  --soft: #cfc2a3;
+  --muted: #9c9178;
+  --glass: rgba(24, 18, 12, 0.9);
+  --panel-solid: #1c140d;
+  --line: rgba(212, 162, 76, 0.3);
+  --a1: #e0b25a;
+  --a2: #3f9a82;
+  --a3: #a63d2f;
+  --input-bg: rgba(0, 0, 0, 0.4);
+  --bubble-bot: rgba(224, 178, 90, 0.07);
+  --bubble-user: linear-gradient(135deg, #3b6b5c, #1f4136);
+  --hover: rgba(63, 154, 130, 0.28);
+  --shadow: rgba(0, 0, 0, 0.75);
+  --title-grad: linear-gradient(180deg, #f8e6ad, #c28a2b 60%, #7c4f12);
+  --title-filter: drop-shadow(0 0 18px rgba(63, 154, 130, 0.6)) drop-shadow(2px 2px 0 #000);
+  --btn-grad: linear-gradient(135deg, #4a7b6b, #243f36);
+  --send-grad: linear-gradient(135deg, #4a7b6b, #243f36);
+  --btn-text: #f4ead2;
+  --btn-border: 2px solid #c28a2b;
+  --btn-shadow: 0 0 16px rgba(63, 154, 130, 0.4);
+  --glow: rgba(127, 209, 185, 0.8);
+  --radius: 8px;
+  --ctl-radius: 6px;
+  --msg-radius: 8px;
+  --panel-border: 3px solid #6b4f2a;
+  --panel-shadow: 0 10px 36px rgba(0, 0, 0, 0.8), inset 0 0 0 2px rgba(224, 178, 90, 0.25), inset 0 0 50px rgba(0, 0, 0, 0.5);
+  --bubble-border: 1px solid rgba(224, 178, 90, 0.35);
+  --bubble-shadow: none;
+  --input-border: 1px solid rgba(224, 178, 90, 0.5);
+  --orn: "\16A0  \2726  \16A2  \2726  \16A6  \2726  \16A8  \2726  \16B1  \2726  \16B2  \2726  \16B7  \2726  \16B9  \2726  \16BA";
+  --bg-image:
+    radial-gradient(ellipse 80% 50% at 80% -10%, rgba(63, 154, 130, 0.3), transparent 65%),
+    radial-gradient(ellipse 70% 45% at 10% 110%, rgba(166, 61, 47, 0.32), transparent 65%),
+    linear-gradient(180deg, #0a1214, #0b0f0e 60%, #120d08);
+
+  font-family: Georgia, "Palatino Linotype", serif;
+}
+body.gothic[data-theme="fantasy"] :is(.box, td.sidebar, .window)::before { opacity: 0.85; }
+body.gothic[data-theme="fantasy"] h1.rainbow {
+  font-family: "MedievalSharp", Georgia, serif;
+  font-weight: 400;
+  font-size: 58px;
+  letter-spacing: 0.08em;
+}
+body.gothic[data-theme="fantasy"] :is(.box h2, .menu-title, .titlebar, .drawer-head > span) {
+  font-family: "MedievalSharp", Georgia, serif;
+  letter-spacing: 0.05em;
+}
+body.gothic[data-theme="fantasy"] .titlebar::after { content: "\25CF  han ateşi"; color: #e0903a; }
+/* Ağır sis, yavaşça sürüklenir */
+body.gothic[data-theme="fantasy"]::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 25% at 20% 70%, rgba(200, 220, 210, 0.11), transparent 70%),
+    radial-gradient(45% 30% at 75% 40%, rgba(200, 220, 210, 0.08), transparent 70%),
+    radial-gradient(35% 25% at 50% 95%, rgba(200, 220, 210, 0.13), transparent 70%);
+  animation: fogDrift 38s ease-in-out infinite alternate;
+}
+@keyframes fogDrift {
+  from { transform: translate3d(-4%, 0, 0); }
+  to   { transform: translate3d(4%, -2%, 0); }
+}
+.fx[data-kind="fantasy"] span {
+  color: #7fd1b9;
+  text-shadow: 0 0 10px rgba(127, 209, 185, 0.85);
+}
+.fx[data-kind="fantasy"] span:nth-child(4n) { color: #e0b25a; text-shadow: 0 0 10px rgba(224, 178, 90, 0.8); }
+
+/* Küçük ekranlarda başlıklar taşmasın */
+@media (max-width: 760px) {
+  body.gothic[data-theme="classic"] h1.rainbow { font-size: 38px; }
+  body.gothic[data-theme="metal"] h1.rainbow { font-size: 42px; }
+  body.gothic[data-theme="fantasy"] h1.rainbow { font-size: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.gothic[data-theme="classic"]::after,
+  body.gothic[data-theme="classic"] .deco .rose,
+  body.gothic[data-theme="metal"]::after,
+  body.gothic[data-theme="fantasy"]::before { animation: none; }
+  .flavor.swap .flavor-tag,
+  .flavor.swap .flavor-text { animation: none; }
+}

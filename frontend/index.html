@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RetroBot 95 - Ana Sayfa</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/modern.css">
+  <link rel="stylesheet" href="/static/anime.css">
+  <link rel="stylesheet" href="/static/gothic.css">
+  <!-- Gotik temalarin baslik fontlari (internet yoksa sistem fontlarina duser) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=MedievalSharp&family=Metal+Mania&family=Oswald:wght@400;600&family=UnifrakturCook:wght@700&display=swap">
+</head>
+<body data-era="1996" data-theme="sakura">
+
+<!-- Anime ve gotik temalar icin arka plan efektleri (yapraklar, kivilcimlar, yarasalar, runler) -->
+<div id="fx" class="fx" aria-hidden="true"></div>
+
+<!-- Klasik gotik (katedral) temasinin sabit dekoru: gul pencere ve iki yanda sivri kemerler -->
+<div class="deco" aria-hidden="true"><i class="rose"></i><i class="arch left"></i><i class="arch right"></i></div>
+
+<!-- data-k="anahtar" olan elemanlarin metni, secili donemin icerigiyle content.js'ten doldurulur
+     (icerideki metin 1996 varsayilanidir). data-e="..." olanlar sadece listelenen donemlerde gorunur. -->
+<center>
+  <div class="era-bar">
+    <button type="button" id="btn-modern" class="btn95 era-btn" data-k="btnModern">[ Modernlestir &gt;&gt; 2030 ]</button>
+    <button type="button" id="btn-anime" class="btn95 era-btn" data-k="btnAnime">[ Anime Evrenine Gir ]</button>
+    <button type="button" id="btn-gothic" class="btn95 era-btn" data-k="btnGothic">[ Gotik Evrene Gir ]</button>
+    <!-- Anime ve Gotik evrenlerin 3'er teması var; bu buton siradakine gecer -->
+    <button type="button" id="btn-theme" class="btn95 era-btn" data-e="anime gothic">
+      &#10047; Temayı değiştir: <b id="theme-name">Sakura Bahçesi</b>
+    </button>
+  </div>
+
+  <marquee class="top-marquee" scrollamount="4">
+    *** RetroBot 95'e hosgeldiniz! *** Sanal dunyanin en havali sohbet robotu ile tanisin! *** Ziyaretci defterini imzalamayi unutmayin! ***
+  </marquee>
+
+  <h1 class="rainbow" data-k="title">~ RetroBot 95 ~</h1>
+  <p class="subtitle">
+    <img class="gif-fake" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="1" height="1">
+    <span class="blink" data-k="tag">&lt;&lt; YENI! &gt;&gt;</span>
+    <span data-k="subtitle">1996'dan sizinle konusan robot arkadasiniz</span>
+  </p>
+
+  <!-- Gotik evrende: her birkac saniyede degisen soz / saka / bilgi kutusu (tiklayinca siradaki) -->
+  <button type="button" id="flavor" class="flavor" data-e="gothic" title="Sıradaki için tıkla">
+    <span id="flavor-tag" class="flavor-tag"></span>
+    <span id="flavor-text" class="flavor-text"></span>
+  </button>
+
+  <hr class="rule">
+
+  <table class="layout" cellspacing="0" cellpadding="6">
+    <tr>
+      <!-- Sol menu -->
+      <td class="sidebar" valign="top" width="170">
+        <div class="menu-title" data-k="menuTitle">MENU</div>
+        <ul class="menu">
+          <li><a href="#sohbet" data-k="m1">&gt; Sohbet Odasi</a></li>
+          <li><a href="#hakkinda" data-k="m2">&gt; Hakkinda</a></li>
+          <li><a href="#linkler" data-k="m3">&gt; Cool Linkler</a></li>
+          <li><a href="#defter" data-k="m4">&gt; Ziyaretci Defteri</a></li>
+        </ul>
+
+        <div class="menu-title" data-k="counterTitle">SAYAC</div>
+        <div class="counter" id="counter">000000</div>
+        <p class="small" data-k="counterNote">Siz <span class="vno">?</span>. ziyaretcimizsiniz!</p>
+
+        <div class="construction">
+          <span class="blink">!!</span> YAPIM ASAMASINDA <span class="blink">!!</span><br>
+          <small>(sayfa surekli gelisiyor)</small>
+        </div>
+      </td>
+
+      <!-- Ana icerik -->
+      <td class="main" valign="top">
+        <a name="sohbet"></a>
+
+        <div class="window">
+          <div class="titlebar">
+            <span data-k="chatTitle">RetroBot 95 - [Sohbet]</span>
+            <span class="winbtns"><b>_</b><b>&#9633;</b><b>X</b></span>
+          </div>
+          <div class="menubar"><u>D</u>osya &nbsp; <u>D</u>uzen &nbsp; <u>G</u>oruntu &nbsp; <u>Y</u>ardim</div>
+
+          <div id="chat-log" class="chat-log" aria-live="polite"></div>
+
+          <form id="chat-form" class="chat-form" autocomplete="off">
+            <input id="chat-input" type="text" maxlength="500" required>
+            <button type="submit" id="send-btn" class="btn95">Gonder</button>
+          </form>
+
+          <div class="statusbar">
+            <span id="status">Hazir.</span>
+            <span id="modem">56k bps</span>
+          </div>
+        </div>
+
+        <br>
+
+        <a name="hakkinda"></a>
+        <div class="box">
+          <h2 data-k="aboutTitle">Bu sayfa nedir?</h2>
+          <p data-k="aboutBody">
+            RetroBot 95, kendini <b>1996 yilinda</b> saniyor. Ona 2000'lerden sonra
+            cikan bir seyi sorarsaniz muhtemelen bilim kurgu filmi anlattiginizi dusunecek.
+            Denemek icin ona <i>"akilli telefon nedir?"</i> diye sorun! :-)
+          </p>
+        </div>
+
+        <a name="linkler"></a>
+        <div class="box">
+          <h2 data-k="linksTitle">Cool Linkler</h2>
+          <ul data-k="linksBody">
+            <li><a href="#" onclick="return false;">Yahoo! - Internetin rehberi</a></li>
+            <li><a href="#" onclick="return false;">AltaVista - Her seyi bulur!</a></li>
+            <li><a href="#" onclick="return false;">Netscape Navigator indir</a></li>
+            <li><a href="#" onclick="return false;">En iyi 10 mIRC kanali</a></li>
+          </ul>
+        </div>
+
+        <a name="defter"></a>
+        <div class="box" id="guestbook">
+          <h2 data-k="gbTitle">Ziyaretci Defteri</h2>
+          <p data-k="gbIntro">Ziyaretci defterimizi imzalamak icin <a href="#" class="join-link" data-open-notes>buraya tiklayin</a>.</p>
+          <ul id="notes-list" class="notes" aria-live="polite"></ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <hr class="rule">
+
+  <!-- Rozetler ve alt yazi: sayfanin degil, sohbet sutununun ortasina hizalanir (bkz. .below) -->
+  <div class="below">
+    <div class="below-main">
+      <p class="badges" data-k="badges">
+        <span class="badge">Best viewed with<br><b>Netscape Navigator</b></span>
+        <span class="badge">800x600<br><b>256 renk</b></span>
+        <span class="badge">Made with<br><b>Notepad</b></span>
+      </p>
+
+      <p class="small" data-k="footer">
+        &copy; 1996 RetroBot Inc. Tum haklari saklidir.<br>
+        Sorulariniz icin: <a href="#" onclick="return false;">webmaster@retrobot95.com.tr</a>
+      </p>
+    </div>
+  </div>
+</center>
+
+<!-- Ziyaretci defteri: "Katil" ile acilan yan panel -->
+<aside id="notes-drawer" class="drawer" aria-hidden="true" aria-labelledby="drawer-title">
+  <div class="drawer-head">
+    <span id="drawer-title" data-k="drawerTitle">Defteri Imzala</span>
+    <button type="button" id="drawer-close" class="drawer-close" aria-label="Kapat">X</button>
+  </div>
+
+  <form id="note-form" class="drawer-body" autocomplete="off">
+    <label for="note-name" data-k="labelName">Adiniz:</label>
+    <input id="note-name" type="text" maxlength="24">
+
+    <label for="note-text" data-k="labelText">Notunuz:</label>
+    <textarea id="note-text" rows="6" maxlength="280" required></textarea>
+    <div class="char-count"><span id="note-count">0</span>/280</div>
+
+    <button type="submit" id="note-submit" class="btn95" data-k="noteSubmit">Imzala</button>
+    <p id="note-status" class="note-status" role="status"></p>
+  </form>
+</aside>
+
+<script src="/static/content.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
