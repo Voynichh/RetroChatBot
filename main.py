@@ -1,3 +1,4 @@
+import logging
 import os
 from pathlib import Path
 from typing import Literal
@@ -6,6 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from google import genai
 from google.genai import errors as genai_errors
 from google.genai import types
@@ -14,6 +16,8 @@ from pydantic import BaseModel, Field
 from notes import router as notes_router
 
 load_dotenv()
+
+logger = logging.getLogger("retrobot")
 
 BASE_DIR = Path(__file__).parent
 FRONTEND_DIR = BASE_DIR / "frontend"
@@ -218,6 +222,12 @@ class ChatResponse(BaseModel):
 
 
 app = FastAPI(title="RetroBot 95")
+# Yalnizca bu bilgisayardan gelen adlarla erisime izin ver: kotu niyetli bir sitenin
+# "DNS rebinding" ile localhost'taki sunucuya istek atip API kotasini harcamasini engeller.
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(","),
+)
 app.include_router(notes_router)
 
 _client: genai.Client | None = None
@@ -279,8 +289,10 @@ async def chat(req: ChatRequest) -> ChatResponse:
             last_error = exc
 
     if response is None:
+        # Ayrinti yalnizca sunucu konsoluna yazilir; tarayiciya ic hata metni gonderilmez.
+        logger.error("Gemini istegi basarisiz oldu: %r", last_error)
         raise HTTPException(
-            status_code=502, detail=f"Gemini istegi basarisiz oldu: {last_error}"
+            status_code=502, detail="Gemini istegi basarisiz oldu, biraz sonra tekrar dene."
         ) from last_error
 
     reply = (response.text or "").strip()
